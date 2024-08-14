@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Qrcodescannertestbed"
         tools:targetApi="31">
+
+        <activity android:name=".QRCodeScannerActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
