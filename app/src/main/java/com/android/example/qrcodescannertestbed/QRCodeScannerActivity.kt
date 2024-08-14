@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.google.zxing.integration.android.IntentIntegrator
+
+
 
 
 class QRCodeScannerActivity : AppCompatActivity() {
@@ -30,6 +33,11 @@ class QRCodeScannerActivity : AppCompatActivity() {
 
     private fun initQRCodeScanner() {
         // Initialize QR code scanner here
+        val integrator = IntentIntegrator(this)
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        integrator.setOrientationLocked(true)
+        integrator.setPrompt("Scan a QR code")
+        integrator.initiateScan()
     }
 
     override fun onRequestPermissionsResult(
