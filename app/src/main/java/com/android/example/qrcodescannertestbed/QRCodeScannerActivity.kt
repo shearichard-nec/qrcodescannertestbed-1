@@ -46,8 +46,10 @@ class QRCodeScannerActivity : AppCompatActivity() {
         // Initialize QR code scanner here
         val integrator = IntentIntegrator(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
-        integrator.setOrientationLocked(true)
-        integrator.setPrompt("Scan a QR code")
+        //integrator.setOrientationLocked(true)
+        integrator.setOrientationLocked(false)
+        //integrator.setPrompt("Scan a QR code (v1)")
+        integrator.setPrompt("")
         integrator.initiateScan()
     }
 
