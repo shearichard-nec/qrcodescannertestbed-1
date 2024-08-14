@@ -1,6 +1,7 @@
 package com.android.example.qrcodescannertestbed
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -8,8 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.zxing.integration.android.IntentIntegrator
-
-
 
 
 class QRCodeScannerActivity : AppCompatActivity() {
@@ -30,7 +29,19 @@ class QRCodeScannerActivity : AppCompatActivity() {
             initQRCodeScanner()
         }
     }
-
+    @Deprecated(message = "onActivityResult is deprecated")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(this, "Scan cancelled", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
     private fun initQRCodeScanner() {
         // Initialize QR code scanner here
         val integrator = IntentIntegrator(this)
